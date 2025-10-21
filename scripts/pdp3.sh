@@ -2066,7 +2066,14 @@ PrepareRinexNav() { # purpose : prepare RINEX multi-systems broadcast ephemeride
                     if [ $? -eq 0 ]; then
                         gunzip -f ${tmpnav}.gz && mv -f "$tmpnav" "$rinex_dir/$rinexnav"
                     else
-                        echo -e "$MSGWAR failed to download RINEX navigation file: $tmpnav"
+                        tmpnav="brdm${doy}0.${year:2:2}p"
+                        urlnav="https://igs.bkg.bund.de/root_ftp/NAV/${year}/${doy}/${tmpnav}"
+                        WgetDownload "$urlnav"
+                        if [ $? -eq 0 ]; then
+                            mv -f "$tmpnav" "$rinex_dir/$rinexnav"
+                        else
+                            echo -e "$MSGWAR failed to download RINEX navigation file: $tmpnav"
+                        fi
                     fi
                 fi
             fi
@@ -2081,7 +2088,11 @@ PrepareRinexNav() { # purpose : prepare RINEX multi-systems broadcast ephemeride
                 if [ $? -ne 0 ]; then
                     WgetDownload "$urlnav" && gunzip -f "${navgps}.Z"
                     if [ $? -ne 0 ]; then
-                        echo -e "$MSGWAR failed to download GPS navigation file: $navgps"
+                        urlnav="https://igs.bkg.bund.de/root_ftp/NAV/${year}/${doy}/${navgps}"
+                        WgetDownload "$urlnav"
+                        if [ $? -ne 0 ]; then
+                            echo -e "$MSGWAR failed to download GPS navigation file: $navgps"
+                        fi
                     fi
                 fi
             fi
@@ -2092,7 +2103,11 @@ PrepareRinexNav() { # purpose : prepare RINEX multi-systems broadcast ephemeride
                 if [ $? -ne 0 ]; then
                     WgetDownload "$urlnav" && gunzip -f "${navglo}.Z"
                     if [ $? -ne 0 ]; then
-                        echo -e "$MSGWAR failed to download GLONASS navigation file: $navglo"
+                        urlnav="https://igs.bkg.bund.de/root_ftp/NAV/${year}/${doy}/${navglo}"
+                        WgetDownload "$urlnav"
+                        if [ $? -ne 0 ]; then
+                            echo -e "$MSGWAR failed to download GLONASS navigation file: $navglo"
+                        fi
                     fi
                 fi
             fi
