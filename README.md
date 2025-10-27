@@ -1,5 +1,7 @@
 ![pridelab.icon](https://github.com/PrideLab/PRIDE-PPPAR/blob/master/doc/PRIDE.png)
 
+## FOR WINDBORNE - PLEASE SEE "howrun.md" 
+
 ## PRIDE-PPPAR ver. 3.2.0 (last updated on 2025-10-20)
 
 PRIDE PPP-AR originates in Dr. Maorong Ge’s efforts on PPP-AR and later developed and improved by Dr. Jianghui Geng's team. It is an open-source software package which is based on many GNSS professionals’ collective work in GNSS Research Center, Wuhan University. We would like to thank them all for their brilliant contributions to this software. 
